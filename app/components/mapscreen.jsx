@@ -2,17 +2,14 @@ import React, { useRef } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-// Ubicación aproximada de la Universidad Tecnológica de Cancún
+
 const UT_CANCUN = {
-    latitude: 21.1619,
-    longitude: -86.8515,
+    latitude: 21.0511,
+    longitude: -86.8422,
     latitudeDelta: 0.05,
     longitudeDelta: 0.05,
 };
 
-// Lista de Pueblos Mágicos
-// Ajusta la ruta a tus imágenes locales con require(...)
-// y asegúrate de subir 2 niveles si estás en "app/components"
 const pueblosMagicos = [
     {
         id: '1',
@@ -20,8 +17,8 @@ const pueblosMagicos = [
         description: 'La ciudad amarilla, con rica historia colonial y maya.',
         image: require('../../assets/image/izamal.jpg'),
         coordinates: {
-            latitude: 20.9667,
-            longitude: -89.6167,
+            latitude: 20.9313,
+            longitude: -89.0177,
         },
     },
     {
@@ -30,8 +27,8 @@ const pueblosMagicos = [
         description: 'Un encantador pueblo lleno de tradición y color.',
         image: require('../../assets/image/valladolid.jpg'),
         coordinates: {
-            latitude: 20.6880,
-            longitude: -88.2021,
+            latitude: 20.6894,
+            longitude: -88.2016,
         },
     },
 ];
@@ -39,7 +36,6 @@ const pueblosMagicos = [
 export default function MapScreen() {
     const mapRef = useRef(null);
 
-    // Función para centrar el mapa en la ubicación seleccionada
     const navigateToLocation = (coords) => {
         mapRef.current?.animateToRegion(
             {
@@ -53,20 +49,17 @@ export default function MapScreen() {
 
     return (
         <View style={styles.container}>
-            {/* Mapa centrado en UT Cancún */}
             <MapView
                 ref={mapRef}
                 style={styles.map}
                 initialRegion={UT_CANCUN}
             >
-                {/* Marcador en UT Cancún */}
                 <Marker
-                    coordinate={{ latitude: 21.1619, longitude: -86.8515 }}
+                    coordinate={{ latitude: 21.0511, longitude: -86.8461 }}
                     title="UT Cancún"
                     description="Universidad Tecnológica de Cancún"
                 />
 
-                {/* Marcadores para cada Pueblo Mágico */}
                 {pueblosMagicos.map((pueblo) => (
                     <Marker
                         key={pueblo.id}
@@ -77,7 +70,6 @@ export default function MapScreen() {
                 ))}
             </MapView>
 
-            {/* Tarjetas horizontales en la parte inferior */}
             <View style={styles.cardsContainer}>
                 <FlatList
                     horizontal
@@ -102,7 +94,6 @@ export default function MapScreen() {
     );
 }
 
-// Estilos
 const styles = StyleSheet.create({
     container: {
         flex: 1,
